@@ -1,16 +1,20 @@
-# This is a sample Python script.
+import pygame
+import time
+import math
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+grass = pygame.image.load("imgs/grass.png")
+track = pygame.image.load("imgs/track.png")
+track_border = pygame.image.load("imgs/track-border.png")
+finish = pygame.image.load("imgs/finish.png")
+red_car = pygame.image.load("imgs/red-car.png")
+green_car = pygame.image.load("imgs/green-car.png")
 
+width, height = track.get_width(), track.get_height()
+win = pygame.display.set_mode(width,height)
+win.set_caption("Racing Game!!")
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+run = True
+while run:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
