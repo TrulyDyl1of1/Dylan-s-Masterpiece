@@ -2,19 +2,27 @@ import pygame
 import time
 import math
 
-grass = pygame.image.load("imgs/grass.png")
-track = pygame.image.load("imgs/track.png")
-track_border = pygame.image.load("imgs/track-border.png")
-finish = pygame.image.load("imgs/finish.png")
-red_car = pygame.image.load("imgs/red-car.png")
-green_car = pygame.image.load("imgs/green-car.png")
+GRASS = pygame.image.load("imgs/grass.png")
+TRACK = pygame.image.load("imgs/track.png")
+TRACK_BORDER = pygame.image.load("imgs/track-border.png")
+FINISH = pygame.image.load("imgs/finish.png")
+RED_CAR = pygame.image.load("imgs/red-car.png")
+GREEN_CAR = pygame.image.load("imgs/green-car.png")
 
-width, height = track.get_width(), track.get_height()
-win = pygame.display.set_mode(width,height)
-win.set_caption("Racing Game!!")
+WIDTH, HEIGHT = TRACK.get_width(), TRACK.get_height()
+WIDTH = pygame.display.set_mode(WIDTH,HEIGHT)
+pygame.display.set_caption("Racing Game!!")
+
+FPS = 60
 
 run = True
+pygame.time.Clock()
+
 while run:
+    time.clock.tick(FPS)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+
+pygame.quit()
+
