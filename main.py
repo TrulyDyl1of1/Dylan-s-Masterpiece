@@ -21,6 +21,7 @@ WIN = pygame.display.set_mode(WIDTH,HEIGHT)
 pygame.display.set_caption("Racing Game!!")
 
 FPS = 60
+
 class AbstractCar:
     def __init__(self, max_vel, rotation_vel):
         self.img = self.IMG
@@ -28,8 +29,13 @@ class AbstractCar:
         self.vel = 0
         self.rotation_vel = rotation_vel
         self.angle = 0
-        self.x, self.y = self.START_POS
-        self.acceleration = 0.1
+    def rotate(self, left = False, right = False):
+        if left:
+            self.angle = self.angle + self.rotation_vel
+        elif right:
+            self.angle = self.angle - self.rotation_vel
+    def draw(self, win):
+        blit_rotate_center(win, self.img)
 
 run = True
 pygame.time.Clock()
