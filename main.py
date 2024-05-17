@@ -9,7 +9,7 @@ def scale_image(img, factor):
     return pygame.transform.scale(img, size)
 
 
-GRASS = scale_image(pygame.image.load("imgs/grass.png"), 2.5)
+GRASS = scale_image(pygame.image.load("imgs/grass.jng"), 2.5)
 TRACK = scale_image(pygame.image.load("imgs/track.png"), 0.9)
 TRACK_BORDER = scale_image(pygame.image.load("imgs/track-border.png"), 0.9)
 FINISH = pygame.image.load("imgs/finish.png")
@@ -28,22 +28,32 @@ class AbstractCar:
         self.max_vel = max_vel
         self.vel = 0
         self.rotation_vel = rotation_vel
-        self.angle = 0
+        self.angle = 90
+        self.x = self.START_POS
+        self.y = self.START_POS
+        self.acceleration = 0.1
     def rotate(self, left = False, right = False):
         if left:
             self.angle = self.angle + self.rotation_vel
         elif right:
             self.angle = self.angle - self.rotation_vel
     def draw(self, win):
-        blit_rotate_center(win, self.img)
+        blit_rotate_center(win, self.img)\
+
+class PlayerCar(AbstractCar):
+    IMG = RED_CAR
+    START_POS = (180,200)
 
 run = True
 pygame.time.Clock()
 images = [(GRASS, (0,0)), (TRACK, (0,0))]
+player_car = PlayerCar(4,4)
 
 def draw():
     for img, pos in images:
         WIN.blit(img, pos)
+    player_car.draw()
+    pygame.display.update()
 
 while run:
     time.clock.tick(FPS)
@@ -57,6 +67,13 @@ while run:
 
         if event.type == pygame.QUIT:
             run = False
+
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_a]:
+        player_car.rotate(left=True)
+    if keys[pygame.K_d]:
+        player_car.rotate(right=True)
 
 pygame.quit()
 
