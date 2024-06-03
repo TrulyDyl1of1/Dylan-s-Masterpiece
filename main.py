@@ -80,6 +80,11 @@ class AbstractCar:
         poi = mask.overlap(car_mask, offset)
         return poi
 
+    def reset(self):
+        self.x, self.y = self.START_POS
+        self.angle = 0
+        self.vel = 0
+
 
 class PlayerCar(AbstractCar):
     IMG = RED_CAR
@@ -92,7 +97,7 @@ class PlayerCar(AbstractCar):
 run = True
 pygame.time.Clock()
 images = [(GRASS, (0,0)), (TRACK, (0,0)), (TRACK_BORDER, (0,0))]
-player_car = PlayerCar(4,4)
+player_car = PlayerCar(8,8)
 
 def draw():
     for img, pos in images:
@@ -117,6 +122,13 @@ while run:
     if player_car.collide(TRACK_BORDER) != None:
         player_car.bounce()
 
+    finish_poi_collide = player_car.collide(FINISH_MASK, *FINISH_POSITION)
+    if finish_poi_collide != None:
+        if finish_poi_collide[1] == 0:
+            player_car.bounce()
+        else:
+            player_car.reset()
+            print("finish")
 
 pygame.quit()
 
