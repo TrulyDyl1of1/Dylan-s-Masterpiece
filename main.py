@@ -120,7 +120,7 @@ while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-                break
+
 
             if event.type == pygame.KEYDOWN:
                 game_info.start_level()
